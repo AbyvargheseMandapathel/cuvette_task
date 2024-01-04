@@ -60,7 +60,7 @@ def user_login(request):
 
     return render(request, 'authentication/login.html', {'error': error_message})
 
-@login_required
+@login_required(login_url='/login/')
 def home(request):
     recent_users_list = CustomUser.objects.exclude(id=request.user.id).order_by('-date_joined')
 
