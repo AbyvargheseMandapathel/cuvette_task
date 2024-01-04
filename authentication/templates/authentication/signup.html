@@ -63,19 +63,11 @@ rel="stylesheet"
         <!-- Left links -->
   
         <div class="d-flex align-items-center">
-          <button data-mdb-ripple-init type="button" class="btn btn-link px-3 me-2">
-            Login
+         
+          <button data-mdb-ripple-init type="button" class="btn btn-primary me-3" onclick="redirectToSignup()">
+            Login for free
           </button>
-          <button data-mdb-ripple-init type="button" class="btn btn-primary me-3">
-            Sign up for free
-          </button>
-          <a
-            data-mdb-ripple-init
-            class="btn btn-dark px-3"
-            href="https://github.com/mdbootstrap/mdb-ui-kit"
-            role="button"
-            ><i class="fab fa-github"></i
-          ></a>
+          
         </div>
       </div>
       <!-- Collapsible wrapper -->
@@ -97,7 +89,7 @@ rel="stylesheet"
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                    class="img-fluid" alt="Sample image">
           </div>
-          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 mt-4">
               <form method="post" action="" enctype="multipart/form-data">
                   {% csrf_token %}            
                 <!-- Email input -->
@@ -121,15 +113,9 @@ rel="stylesheet"
                       placeholder="Enter a valid email address" name = "last_name"/>
                     <label class="form-label" for="form3Example3">Last  Name</label>
                   </div>
-                  {% comment %} <div class="form-outline mb-4">
-                    <input type="text" id="form3Example3" class="form-control form-control-lg"
-                       name = "profession"/>
-                    <label class="form-label" for="form3Example3">Profession</label>
-                  </div> {% endcomment %}
                 <div class="form-outline mb-4">
                     <input type="file" id="id_profile_picture" class="form-control form-control-lg"
                            name="profile_picture" accept="image/*" />
-                    <label class="form-label" for="id_profile_picture">Profile Picture</label>
                 </div>
       
                 <!-- Password input -->
@@ -149,7 +135,7 @@ rel="stylesheet"
                     <input type="submit" class="btn btn-primary btn-lg"
                            style="padding-left: 2.5rem; padding-right: 2.5rem;">
                     <p class="small fw-bold mt-2 pt-1 mb-0">
-                        Don't have an account? <a href="#" class="link-danger">Register</a>
+                        Alreay  have an account? <a href="{% url 'login' %}" class="link-danger">Login</a>
                     </p>
                 </div>
             </form>
@@ -195,6 +181,10 @@ setTimeout(function() {
       }, 1000);
   }
 }, 5000);
+
+  function redirectToSignup() {
+      window.location.href = "{% url 'login' %}";
+  }
 </script>
 </body>
 </html>

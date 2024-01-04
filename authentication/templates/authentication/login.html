@@ -70,19 +70,9 @@ rel="stylesheet"
         <!-- Left links -->
   
         <div class="d-flex align-items-center">
-          <button data-mdb-ripple-init type="button" class="btn btn-link px-3 me-2">
-            Login
-          </button>
-          <button data-mdb-ripple-init type="button" class="btn btn-primary me-3">
+          <button data-mdb-ripple-init type="button" class="btn btn-primary me-3" onclick="redirectToSignup()">
             Sign up for free
-          </button>
-          <a
-            data-mdb-ripple-init
-            class="btn btn-dark px-3"
-            href="https://github.com/mdbootstrap/mdb-ui-kit"
-            role="button"
-            ><i class="fab fa-github"></i
-          ></a>
+        </button>
         </div>
       </div>
       <!-- Collapsible wrapper -->
@@ -119,7 +109,7 @@ rel="stylesheet"
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <input type="submit" class="btn btn-primary btn-lg"
                     style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                  <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+                  <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="{% url 'signup' %}"
                       class="link-danger">Register</a></p>
                 </div>  
               </form>
@@ -152,6 +142,11 @@ rel="stylesheet"
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
 ></script>
+<script>
+  function redirectToSignup() {
+      window.location.href = "{% url 'signup' %}";
+  }
+</script>
 </body>
 </html>
 
