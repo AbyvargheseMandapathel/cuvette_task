@@ -126,17 +126,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
-# settings.py
-
-# Static files (CSS, JavaScript, images)
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-# Additional locations of static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Where to collect static files when using the collectstatic management command.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

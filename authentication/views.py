@@ -17,11 +17,9 @@ def signup(request):
         last_name = request.POST['last_name']
         profile_picture = request.FILES.get('profile_picture')  # Use request.FILES
 
-         # Validate unique email
         if CustomUser.objects.filter(username=username).exists():
             return render(request, 'authentication/signup.html', {'error': 'Username is already taken'})
 
-        # Validate unique email
         if CustomUser.objects.filter(email=email).exists():
             return render(request, 'authentication/signup.html', {'error': 'Email is already taken'})
 
@@ -37,7 +35,6 @@ def signup(request):
             login(request, user)
             return redirect('home')
         else:
-            # Handle password mismatch
             return render(request, 'authentication/signup.html', {'error': 'Passwords do not match'})
 
     return render(request, 'authentication/signup.html')
@@ -49,42 +46,33 @@ def user_login(request):
         username_or_email = request.POST['username_or_email']
         password = request.POST['password']
 
-        # Authenticate user by either username or email
         user = authenticate(request, username=username_or_email, password=password)
 
         if user is not None:
-            # Login successful, redirect to home
             login(request, user)
             return redirect('home')
 
-        # If authentication by username fails, try by email
         user_by_email = CustomUser.objects.filter(email=username_or_email).first()
         if user_by_email is not None and user_by_email.check_password(password):
-            # Login successful, redirect to home
             login(request, user_by_email)
             return redirect('home')
 
-        # Set error message for invalid login
         error_message = 'Invalid login credentials'
 
     return render(request, 'authentication/login.html', {'error': error_message})
 
 @login_required
 def home(request):
-    # Fetch 5 recently added users excluding the current user
     recent_users_list = CustomUser.objects.exclude(id=request.user.id).order_by('-date_joined')
 
-    # Paginate the recent users
-    paginator = Paginator(recent_users_list,1)
+    paginator = Paginator(recent_users_list,3)
     page = request.GET.get('page')
 
     try:
         recent_users = paginator.page(page)
     except PageNotAnInteger:
-        # If the page parameter is not an integer, show the first page
         recent_users = paginator.page(1)
     except EmptyPage:
-        # If the page is out of range, deliver the last page
         recent_users = paginator.page(paginator.num_pages)
 
     user = request.user
@@ -104,31 +92,25 @@ def user_logout(request):
 
 @login_required
 def profile_page(request):
-    # Assuming you have a user object associated with the request
     user = request.user
 
-    # Additional user details
     first_name = user.first_name
     last_name = user.last_name
     profile_picture = user.profile_picture 
 
-    # Context data
     context = {
         'user': user,
         'first_name': first_name,
         'last_name': last_name,
         'profile_picture': profile_picture,
-        # Add more context variables if needed
     }
 
     return render(request, 'authentication/profile_page.html', context)
 
 @login_required
 def view_profile(request, user_id):
-    # Retrieve the user based on the user_id
     user = get_object_or_404(CustomUser, id=user_id)
 
-    # Additional user details
     first_name = user.first_name
     last_name = user.last_name
     profile_picture = user.profile_picture
@@ -139,7 +121,6 @@ def view_profile(request, user_id):
         'first_name': first_name,
         'last_name': last_name,
         'profile_picture': profile_picture,
-        # Add more context variables if needed
     }
 
     return render(request, 'authentication/view_profile.html', context)

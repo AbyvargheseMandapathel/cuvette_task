@@ -1,4 +1,3 @@
-# authentication/urls.py
 from django.urls import path
 from .views import signup, user_login, home,user_logout,profile_page,view_profile
 from django.conf import settings

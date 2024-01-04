@@ -6,11 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{username}} Dashboard</title>
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
     <style>
         body {
@@ -27,35 +24,26 @@
 
 <body class="bg-body-tertiary">
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-        <!-- Container wrapper -->
         <div class="container">
-            <!-- Navbar brand -->
             <a class="navbar-brand me-2" href="https://mdbgo.com/">
                 <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="16"
                     alt="MDB Logo" loading="lazy" style="margin-top: -1px;" />
             </a>
 
-            <!-- Toggle button -->
             <button data-mdb-collapse-init class="navbar-toggler" type="button"
                 data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
 
-            <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarButtonsExample">
-                <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="#"></a>
                     </li>
                 </ul>
-                <!-- Left links -->
-                <!-- Right elements -->
                 <div class="d-flex align-items-center">
-                    <!-- Avatar -->
                     <div class="dropdown">
                         <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow"
                             href="#" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
@@ -75,17 +63,13 @@
                         </ul>
                     </div>
                 </div>
-                <!-- Collapsible wrapper -->
             </div>
-            <!-- Container wrapper -->
         </div>
     </nav>
-    <!-- Navbar -->
 
     <main class="container mt-4">
         <div class="card mx-auto" style="max-width: 300px;">
             <div class="card-body text-center">
-                <!-- Display the profile picture -->
                 {% if user.profile_picture %}
                 <img src="{{ profile_picture.url }}" alt="Profile Picture" class="card-img-top profile-image img-fluid">
                 {% else %}
@@ -96,17 +80,13 @@
                 <p class="card-text">
                     <strong>Username:</strong> {{ user.username }}<br>
                     <strong>Email:</strong> {{ user.email }}<br>
-                    <!-- Add more user attributes as needed -->
                 </p>
             </div>
         </div>
     </main>
     <footer class="fixed-bottom text-center bg-body-tertiary">
-        <!-- Grid container -->
         <div class="container p-4 pb-0">
-          <!-- Section: Social media -->
           <section class="mb-4">
-            <!-- Facebook -->
             <a
             data-mdb-ripple-init
               class="btn text-white btn-floating m-1"
@@ -114,7 +94,6 @@
               href="tel:8078879864"
               role="button"
               ><i class="fa-solid fa-phone"></i></a>
-              <!-- portfolio -->
             <a
             data-mdb-ripple-init
               class="btn text-white btn-floating m-1"
@@ -122,7 +101,6 @@
               href="https://abyvarghesemandapathel.github.io/"
               role="button"
               ><i class="fa-solid fa-globe"></i></a>
-            <!-- Linkedin -->
             <a
               data-mdb-ripple-init
               class="btn text-white btn-floating m-1"
@@ -131,7 +109,6 @@
               role="button"
               ><i class="fab fa-linkedin-in"></i
             ></a>
-            <!-- Github -->
             <a
               data-mdb-ripple-init
               class="btn text-white btn-floating m-1"
@@ -141,13 +118,10 @@
               ><i class="fab fa-github"></i
             ></a>
           </section>
-          <!-- Section: Social media -->
         </div>
-        <!-- Grid container -->
       </footer>
 
 
-    <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
