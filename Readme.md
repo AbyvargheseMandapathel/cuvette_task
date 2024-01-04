@@ -47,10 +47,21 @@ https://github.com/AbyvargheseMandapathel/cuvette_task.git
     python manage.py runserver
 ```
 
-#Screenshots
+# Screenshots
+Login
 ![Login](image.png)
+
+SignUp
 ![SignUp](image-1.png)
+
+Dashboard
 ![Dashaboard](image-2.png)
+
+Profile Page
 ![Profile Page](image-3.png)
+
+Validation - Login Page
 ![Validation - Login Page](image-4.png)
+
+Validation - SignUp
 ![Validation - Signup page](image-5.png)
