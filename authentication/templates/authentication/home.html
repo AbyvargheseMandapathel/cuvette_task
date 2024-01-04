@@ -81,20 +81,58 @@
         </div>
     </nav>
     <!-- Navbar -->
+<!-- Content Section -->
+<main class="d-flex justify-content-center align-items-center">
 
-    <!-- Content Section -->
-    <main class="d-flex justify-content-center align-items-center">
-        <div class="card text-center">
+  <!-- User Information Card -->
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Hi {{ username }}</h5>
+      <p class="card-text">Email: {{ email }}</p>
+      <!-- Add additional profile information here -->
+
+      <!-- Profile Page Button -->
+      <a href="#" class="btn btn-primary">Go to Profile Page</a>
+      <!-- Logout Button -->
+      <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    </div>
+  </div>
+
+  <!-- New Line -->
+  <br>
+
+  <!-- Other Users Section -->
+  <div class="other-users-section mt-4">
+    <!-- Heading for Other Users -->
+    <h2>Other Users</h2>
+
+    <!-- Carousel Section -->
+    <div id="recentUsersCarousel" class="carousel slide mt-2" data-ride="carousel">
+      <div class="carousel-inner">
+        {% for recent_user in recent_users %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Hi {{ username }}</h5>
-                <p class="card-text">Welcome to our platform!</p>
-                <!-- Profile Page Button -->
-                <a href="#" class="btn btn-primary">Go to Profile Page</a>
-                <!-- Logout Button -->
-                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+              <h5 class="card-title">{{ recent_user.username }}</h5>
+              <p class="card-text">Email: {{ recent_user.email }}</p>
+              <!-- Add additional user information here -->
             </div>
+          </div>
         </div>
-    </main>
+        {% endfor %}
+      </div>
+      <a class="carousel-control-prev" href="#recentUsersCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#recentUsersCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+
+</main>
 
     <!-- Fixed Footer -->
     <footer class="text-center bg-body-tertiary">

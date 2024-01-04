@@ -48,11 +48,22 @@ def user_login(request):
 
     return render(request, 'authentication/login.html', {'error': error_message})
 
+from django.shortcuts import render, redirect
+from .models import CustomUser
+
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'authentication/home.html', {'username': request.user.username})
+        # Fetch 5 recently added users
+        recent_users = CustomUser.objects.order_by('-date_joined')[:5]
+
+        return render(request, 'authentication/home.html', {
+            'username': request.user.username,
+            'email': request.user.email,
+            'recent_users': recent_users,
+        })
     else:
         return redirect('login')
+
     
 def user_logout(request):
     logout(request)
