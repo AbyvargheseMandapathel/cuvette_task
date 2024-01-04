@@ -1,33 +1,3 @@
-{% comment %} <!-- authentication/templates/authentication/signup.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-</head>
-<body>
-    <h2>Sign Up</h2>
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-    <form method="post" action="">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br>
-        <label for="email">Email:</label>
-        <input type="email" name="email" required><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br>
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" name="confirm_password" required><br>
-        <input type="submit" value="Sign Up">
-    </form>
-</body>
-</html> {% endcomment %}
-
-
 <!-- authentication/templates/authentication/login.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Create An Account</title>
     <!-- Font Awesome -->
 <link
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -122,16 +92,17 @@ rel="stylesheet"
   <!-- Navbar -->
 
     <!-- Main content section -->
-    <section class="vh-50 d-flex align-items-center ">
-        <div class="container-fluid h-custom">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                        class="img-fluid" alt="Sample image">
-                </div>
-                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form method="post" action="">
-                        {% csrf_token %}             
+    <!-- Main content section -->
+<section class="vh-50 d-flex align-items-center ">
+  <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-9 col-lg-6 col-xl-5">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                   class="img-fluid" alt="Sample image">
+          </div>
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+              <form method="post" action="" enctype="multipart/form-data">
+                  {% csrf_token %}            
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <input type="text" id="form3Example3" class="form-control form-control-lg"
@@ -143,12 +114,33 @@ rel="stylesheet"
                       placeholder="Enter a valid email address" name = "email"/>
                     <label class="form-label" for="form3Example3">email</label>
                   </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example3" class="form-control form-control-lg"
+                      placeholder="Enter a valid email address" name = "first_name"/>
+                    <label class="form-label" for="form3Example3">First Name</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example3" class="form-control form-control-lg"
+                      placeholder="Enter a valid email address" name = "last_name"/>
+                    <label class="form-label" for="form3Example3">Last  Name</label>
+                  </div>
+                  {% comment %} <div class="form-outline mb-4">
+                    <input type="text" id="form3Example3" class="form-control form-control-lg"
+                       name = "profession"/>
+                    <label class="form-label" for="form3Example3">Profession</label>
+                  </div> {% endcomment %}
+                <div class="form-outline mb-4">
+                    <input type="file" id="id_profile_picture" class="form-control form-control-lg"
+                           name="profile_picture" accept="image/*" />
+                    <label class="form-label" for="id_profile_picture">Profile Picture</label>
+                </div>
       
                 <!-- Password input -->
                 <div class="form-outline mb-3">
                   <input type="password" id="form3Example4" class="form-control form-control-lg"
                     placeholder="Enter password"  name="password" />
                   <label class="form-label" for="form3Example4">Password</label>
+                  <div id="password-strength" class="form-text mb-4"></div>
                 </div>
                 <!-- Password input -->
                 <div class="form-outline mb-3">
@@ -157,30 +149,18 @@ rel="stylesheet"
                     <label class="form-label" for="form3Example4">Confirm Password</label>
                   </div>
       
-                <div class="d-flex justify-content-between align-items-center">
-                  <!-- Checkbox -->
-                  <div class="form-check mb-0">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                    <label class="form-check-label" for="form2Example3">
-                      Remember me
-                    </label>
-                  </div>
-                  <a href="#!" class="text-body">Forgot password?</a>
+                  <div class="text-center text-lg-start mt-4 pt-2">
+                    <input type="submit" class="btn btn-primary btn-lg"
+                           style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                    <p class="small fw-bold mt-2 pt-1 mb-0">
+                        Don't have an account? <a href="#" class="link-danger">Register</a>
+                    </p>
                 </div>
-      
-                <div class="text-center text-lg-start mt-4 pt-2">
-                  <input type="submit" class="btn btn-primary btn-lg"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                  <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                      class="link-danger">Register</a></p>
-                </div>  
-              </form>
-            </div>
-          </div>
-        </div>   
-        <!-- Fixed Footer --> 
-      </section>  
-    <!-- MDB -->
+            </form>
+        </div>
+    </div>
+</div>
+</section>
 <!-- Fixed Footer -->
 <footer class="fixed-bottom text-center bg-body-tertiary">
     <!-- Grid container -->
@@ -204,6 +184,64 @@ rel="stylesheet"
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
 ></script>
+<!-- Include this script in the head section of your HTML -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const passwordInput = document.getElementById("form3Example4");
+    const passwordStrength = document.getElementById("password-strength");
+    const form = document.getElementById("registration-form"); // Change this ID to your form ID
+
+    passwordInput.addEventListener("input", function () {
+      const password = passwordInput.value;
+      const strength = calculatePasswordStrength(password);
+      displayPasswordStrength(strength);
+
+      // Enable or disable the form submit button based on password strength
+      if (strength >= 32) {
+        form.querySelector('input[type="submit"]').removeAttribute("disabled");
+      } else {
+        form.querySelector('input[type="submit"]').setAttribute("disabled", "disabled");
+      }
+    });
+
+    function calculatePasswordStrength(password) {
+      // Implement your password strength logic here
+      // Example: Check for minimum length, uppercase, lowercase, number, and symbol
+      const minLength = 8;
+      const hasUppercase = /[A-Z]/.test(password);
+      const hasLowercase = /[a-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+      const strength =
+        (hasUppercase + hasLowercase + hasNumber + hasSymbol) * minLength;
+
+      return strength;
+    }
+
+    function displayPasswordStrength(strength) {
+      let feedback = "";
+      if (strength === 0) {
+        feedback = "Password is too weak";
+      } else if (strength < 16) {
+        feedback = "Weak";
+      } else if (strength < 32) {
+        feedback = "Moderate";
+      } else {
+        feedback = "Strong";
+      }
+
+      passwordStrength.textContent = `Password Strength: ${feedback}`;
+    }
+  });
+
+  $(document).ready(function(){
+    setTimeout(function(){
+      $("#error-alert").fadeOut("slow");
+    }, 350);
+  });
+</script>
+
 </body>
 </html>
 

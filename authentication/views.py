@@ -1,8 +1,9 @@
 # authentication/views.py
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect ,  get_object_or_404
 from django.contrib.auth import authenticate, login , logout
-from django.contrib.auth.forms import AuthenticationForm
 from .models import CustomUser
+from django.contrib.auth.decorators import login_required
+
 
 def signup(request):
     if request.method == 'POST':
@@ -10,9 +11,19 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        profile_picture = request.FILES.get('profile_picture')  # Use request.FILES
 
         if password == confirm_password:
-            user = CustomUser.objects.create_user(username=username, email=email, password=password)
+            user = CustomUser.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+                profile_picture=profile_picture,
+            )
             login(request, user)
             return redirect('home')
         else:
@@ -48,23 +59,62 @@ def user_login(request):
 
     return render(request, 'authentication/login.html', {'error': error_message})
 
-from django.shortcuts import render, redirect
-from .models import CustomUser
-
+@login_required
 def home(request):
-    if request.user.is_authenticated:
-        # Fetch 5 recently added users
-        recent_users = CustomUser.objects.order_by('-date_joined')[:5]
+    # Fetch 5 recently added users excluding the current user
+    recent_users = CustomUser.objects.exclude(id=request.user.id).order_by('-date_joined')[:5]
 
-        return render(request, 'authentication/home.html', {
-            'username': request.user.username,
-            'email': request.user.email,
-            'recent_users': recent_users,
-        })
-    else:
-        return redirect('login')
+    return render(request, 'authentication/home.html', {
+        'username': request.user.username,
+        'email': request.user.email,
+        'recent_users': recent_users,
+    })
 
     
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def profile_page(request):
+    # Assuming you have a user object associated with the request
+    user = request.user
+
+    # Additional user details
+    first_name = user.first_name
+    last_name = user.last_name
+    profile_picture = user.profile_picture 
+
+    # Context data
+    context = {
+        'user': user,
+        'first_name': first_name,
+        'last_name': last_name,
+        'profile_picture': profile_picture,
+        # Add more context variables if needed
+    }
+
+    return render(request, 'authentication/profile_page.html', context)
+
+
+def view_profile(request, user_id):
+    # Retrieve the user based on the user_id
+    user = get_object_or_404(CustomUser, id=user_id)
+
+    # Additional user details
+    first_name = user.first_name
+    last_name = user.last_name
+    profile_picture = user.profile_picture
+
+    # Context data
+    context = {
+        'user': user,
+        'first_name': first_name,
+        'last_name': last_name,
+        'profile_picture': profile_picture,
+        # Add more context variables if needed
+    }
+
+    return render(request, 'authentication/view_profile.html', context)
+
+
