@@ -63,11 +63,11 @@
                                 src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
                                 class="rounded-circle" height="25" alt="Black and White Portrait of a Man"
                                 loading="lazy" />
-                            Hi {{ user.username }}
+                            Hi {{ request.user.username }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                             <li>
-                                <a class="dropdown-item" href="{% url 'profile_page' %}">{{ user.username }}'s profile</a>
+                                <a class="dropdown-item" href="{% url 'profile_page' %}">{{ request.user.username }}'s profile</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
@@ -82,17 +82,17 @@
     </nav>
     <!-- Navbar -->
 
-    <div class="container mt-5">
-        <div class="card">
-            <!-- Display the profile picture -->
-            {% if profile_picture %}
-                <img src="{{ profile_picture.url }}" alt="Profile Picture">
-            {% else %}
+    <main class="container mt-4">
+        <div class="card mx-auto" style="max-width: 300px;">
+            <div class="card-body text-center">
+                <!-- Display the profile picture -->
+                {% if user.profile_picture %}
+                <img src="{{ profile_picture.url }}" alt="Profile Picture" class="card-img-top profile-image img-fluid">
+                {% else %}
                 <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
-                    alt="Default Profile Picture">
-            {% endif %}
-            <div class="card-body">
-                <h5 class="card-title">Name: {{ first_name }} {{ last_name }}</h5>
+                    alt="Default Profile Picture" class="card-img-top profile-image img-fluid">
+                {% endif %}
+                <h5 class="card-title">Name:{{ first_name }} {{ last_name }}</h5>
                 <p class="card-text">
                     <strong>Username:</strong> {{ user.username }}<br>
                     <strong>Email:</strong> {{ user.email }}<br>
@@ -100,10 +100,11 @@
                 </p>
             </div>
         </div>
-    </div>
+    </main>
+    
 
-    <!-- Fixed Footer -->
-    <footer class="text-center bg-body-tertiary">
+     <!-- Fixed Footer -->
+     <footer class="text-center bg-body-tertiary">
         <!-- Grid container -->
         <div class="container pt-4">
             <!-- Section: Social media -->
@@ -122,22 +123,12 @@
         <!-- Copyright -->
     </footer>
 
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
-    <script>
-        // Adjust vh-100 dynamically based on the heights of navbar and footer
-        window.addEventListener('DOMContentLoaded', () => {
-            const navbarHeight = document.querySelector('nav').offsetHeight;
-            const footerHeight = document.querySelector('footer').offsetHeight;
-            document.body.style.setProperty('--vh', `calc(100vh - ${navbarHeight + footerHeight}px)`);
-        });
-
-        window.addEventListener('resize', () => {
-            const navbarHeight = document.querySelector('nav').offsetHeight;
-            const footerHeight = document.querySelector('footer').offsetHeight;
-            document.body.style.setProperty('--vh', `calc(100vh - ${navbarHeight + footerHeight}px)`);
-        });
-    </script>
 </body>
 
 </html>

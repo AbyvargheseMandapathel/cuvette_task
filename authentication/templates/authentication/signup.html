@@ -24,13 +24,6 @@ rel="stylesheet"
 </head>
 {% comment %} <body>
     <h2>Login</h2> {% endcomment %}
-    {% if error %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-          </div>
-    {% endif %}
-    
-
     <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
     <!-- Container wrapper -->
@@ -90,7 +83,11 @@ rel="stylesheet"
     <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->
-
+  {% if error %}
+  <div id="error-message" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+{% endif %}
     <!-- Main content section -->
     <!-- Main content section -->
 <section class="vh-50 d-flex align-items-center ">
@@ -106,12 +103,12 @@ rel="stylesheet"
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <input type="text" id="form3Example3" class="form-control form-control-lg"
-                    placeholder="Enter a valid email address" name = "username"/>
+                    placeholder="Enter a valid email address" name = "username" required/>
                   <label class="form-label" for="form3Example3">Username</label>
                 </div>
                 <div class="form-outline mb-4">
                     <input type="email" id="form3Example3" class="form-control form-control-lg"
-                      placeholder="Enter a valid email address" name = "email"/>
+                      placeholder="Enter a valid email address" name = "email" required/>
                     <label class="form-label" for="form3Example3">email</label>
                   </div>
                   <div class="form-outline mb-4">
@@ -138,14 +135,13 @@ rel="stylesheet"
                 <!-- Password input -->
                 <div class="form-outline mb-3">
                   <input type="password" id="form3Example4" class="form-control form-control-lg"
-                    placeholder="Enter password"  name="password" />
+                    placeholder="Enter password"  name="password" required />
                   <label class="form-label" for="form3Example4">Password</label>
-                  <div id="password-strength" class="form-text mb-4"></div>
                 </div>
                 <!-- Password input -->
                 <div class="form-outline mb-3">
                     <input type="password" id="form3Example4" class="form-control form-control-lg"
-                      placeholder="Enter password"  name="confirm_password" />
+                      placeholder="Enter password"  name="confirm_password" required/>
                     <label class="form-label" for="form3Example4">Confirm Password</label>
                   </div>
       
@@ -184,63 +180,27 @@ rel="stylesheet"
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
 ></script>
-<!-- Include this script in the head section of your HTML -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const passwordInput = document.getElementById("form3Example4");
-    const passwordStrength = document.getElementById("password-strength");
-    const form = document.getElementById("registration-form"); // Change this ID to your form ID
+// Add a timeout to make the error message disappear after 5 seconds
+setTimeout(function() {
+  var errorMessage = document.getElementById('error-message');
+  if (errorMessage) {
+      // Add a fade-out effect before removing the element
+      errorMessage.style.transition = 'opacity 1s';
+      errorMessage.style.opacity = 0;
 
-    passwordInput.addEventListener("input", function () {
-      const password = passwordInput.value;
-      const strength = calculatePasswordStrength(password);
-      displayPasswordStrength(strength);
-
-      // Enable or disable the form submit button based on password strength
-      if (strength >= 32) {
-        form.querySelector('input[type="submit"]').removeAttribute("disabled");
-      } else {
-        form.querySelector('input[type="submit"]').setAttribute("disabled", "disabled");
-      }
-    });
-
-    function calculatePasswordStrength(password) {
-      // Implement your password strength logic here
-      // Example: Check for minimum length, uppercase, lowercase, number, and symbol
-      const minLength = 8;
-      const hasUppercase = /[A-Z]/.test(password);
-      const hasLowercase = /[a-z]/.test(password);
-      const hasNumber = /\d/.test(password);
-      const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-      const strength =
-        (hasUppercase + hasLowercase + hasNumber + hasSymbol) * minLength;
-
-      return strength;
-    }
-
-    function displayPasswordStrength(strength) {
-      let feedback = "";
-      if (strength === 0) {
-        feedback = "Password is too weak";
-      } else if (strength < 16) {
-        feedback = "Weak";
-      } else if (strength < 32) {
-        feedback = "Moderate";
-      } else {
-        feedback = "Strong";
-      }
-
-      passwordStrength.textContent = `Password Strength: ${feedback}`;
-    }
-  });
-
-  $(document).ready(function(){
-    setTimeout(function(){
-      $("#error-alert").fadeOut("slow");
-    }, 350);
-  });
+      // Remove the element after the fade-out effect
+      setTimeout(function() {
+          errorMessage.remove();
+      }, 1000);
+  }
+}, 5000);
 </script>
+</body>
+</html>
+
+
+
 
 </body>
 </html>

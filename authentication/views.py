@@ -5,6 +5,7 @@ from .models import CustomUser
 from django.contrib.auth.decorators import login_required
 
 
+
 def signup(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -14,6 +15,14 @@ def signup(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         profile_picture = request.FILES.get('profile_picture')  # Use request.FILES
+
+         # Validate unique email
+        if CustomUser.objects.filter(username=username).exists():
+            return render(request, 'authentication/signup.html', {'error': 'Username is already taken'})
+
+        # Validate unique email
+        if CustomUser.objects.filter(email=email).exists():
+            return render(request, 'authentication/signup.html', {'error': 'Email is already taken'})
 
         if password == confirm_password:
             user = CustomUser.objects.create_user(
@@ -63,14 +72,17 @@ def user_login(request):
 def home(request):
     # Fetch 5 recently added users excluding the current user
     recent_users = CustomUser.objects.exclude(id=request.user.id).order_by('-date_joined')[:5]
+    user = request.user
+    profile_picture = user.profile_picture 
 
     return render(request, 'authentication/home.html', {
         'username': request.user.username,
         'email': request.user.email,
         'recent_users': recent_users,
+        'profile_picture': profile_picture,
     })
 
-    
+@login_required    
 def user_logout(request):
     logout(request)
     return redirect('login')
@@ -96,7 +108,7 @@ def profile_page(request):
 
     return render(request, 'authentication/profile_page.html', context)
 
-
+@login_required
 def view_profile(request, user_id):
     # Retrieve the user based on the user_id
     user = get_object_or_404(CustomUser, id=user_id)
