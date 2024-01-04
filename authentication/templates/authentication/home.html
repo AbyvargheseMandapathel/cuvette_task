@@ -1,127 +1,137 @@
-<!-- authentication/templates/authentication/login.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>{{username}} Dashboard</title>
     <!-- Font Awesome -->
-<link
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
-rel="stylesheet"
-/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+    </style>
 </head>
+
+<body class="bg-body-tertiary">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <!-- Container wrapper -->
         <div class="container">
-          <!-- Navbar brand -->
-          <a class="navbar-brand me-2" href="https://mdbgo.com/">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-              height="16"
-              alt="MDB Logo"
-              loading="lazy"
-              style="margin-top: -1px;"
-            />
-          </a>
-      
-          <!-- Toggle button -->
-          <button
-            data-mdb-collapse-init
-            class="navbar-toggler"
-            type="button"
-            data-mdb-target="#navbarButtonsExample"
-            aria-controls="navbarButtonsExample"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-      
-          <!-- Collapsible wrapper -->
-          <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="#"></a>
-              </li>
-            </ul>
-            <!-- Left links -->
-       <!-- Right elements -->
-    <div class="d-flex align-items-center">
-            <!-- Avatar -->
-        <div class="dropdown">
-            <a
-              data-mdb-dropdown-init
-              class="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuAvatar"
-              role="button"
-              aria-expanded="false"
-            >
-              <img
-                src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
-                class="rounded-circle"
-                height="25"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
-              Hi {{ username }}
+            <!-- Navbar brand -->
+            <a class="navbar-brand me-2" href="https://mdbgo.com/">
+                <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="16"
+                    alt="MDB Logo" loading="lazy" style="margin-top: -1px;" />
             </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownMenuAvatar"
-            >
-              <li>
-                <a class="dropdown-item" href="#">{{ username }}'s profile</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Logout</a>
-              </li>
-            </ul>
-          </div>
-          </div>
-          <!-- Collapsible wrapper -->
-        </div>
-        <!-- Container wrapper -->
-      </nav>
-      <!-- Navbar -->
-    <h2>Welcome, {{ username }}!</h2>
-    <!-- Fixed Footer -->
-<footer class="fixed-bottom text-center bg-body-tertiary">
-    <!-- Grid container -->
-    <div class="container pt-4">
-        <!-- Section: Social media -->
-        <section class="mb-4">
-            <!-- Your social media links -->
-        </section>
-        <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2020 Copyright:
-        <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
-</footer>
-    <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
-  ></script>
-  </body>
-  </html>
+            <!-- Toggle button -->
+            <button data-mdb-collapse-init class="navbar-toggler" type="button"
+                data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- Avatar -->
+                    <div class="dropdown">
+                        <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                            href="#" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+                            <img
+                                src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+                                class="rounded-circle" height="25" alt="Black and White Portrait of a Man"
+                                loading="lazy" />
+                            Hi {{ username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a class="dropdown-item" href="#">{{ username }}'s profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Collapsible wrapper -->
+            </div>
+            <!-- Container wrapper -->
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Content Section -->
+    <main class="d-flex justify-content-center align-items-center">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Hi {{ username }}</h5>
+                <p class="card-text">Welcome to our platform!</p>
+                <!-- Profile Page Button -->
+                <a href="#" class="btn btn-primary">Go to Profile Page</a>
+                <!-- Logout Button -->
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fixed Footer -->
+    <footer class="text-center bg-body-tertiary">
+        <!-- Grid container -->
+        <div class="container pt-4">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Your social media links -->
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2020 Copyright:
+            <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+    <script>
+        // Adjust vh-100 dynamically based on the heights of navbar and footer
+        window.addEventListener('DOMContentLoaded', () => {
+            const navbarHeight = document.querySelector('nav').offsetHeight;
+            const footerHeight = document.querySelector('footer').offsetHeight;
+            document.body.style.setProperty('--vh', `calc(100vh - ${navbarHeight + footerHeight}px)`);
+        });
+
+        window.addEventListener('resize', () => {
+            const navbarHeight = document.querySelector('nav').offsetHeight;
+            const footerHeight = document.querySelector('footer').offsetHeight;
+            document.body.style.setProperty('--vh', `calc(100vh - ${navbarHeight + footerHeight}px)`);
+        });
+    </script>
+</body>
+
+</html>

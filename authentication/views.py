@@ -1,6 +1,6 @@
 # authentication/views.py
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import CustomUser
 
@@ -53,3 +53,7 @@ def home(request):
         return render(request, 'authentication/home.html', {'username': request.user.username})
     else:
         return redirect('login')
+    
+def user_logout(request):
+    logout(request)
+    return redirect('login')
