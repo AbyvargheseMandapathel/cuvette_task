@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect ,  get_object_or_404
 from django.contrib.auth import authenticate, login , logout
 from .models import CustomUser
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 
@@ -71,7 +72,21 @@ def user_login(request):
 @login_required
 def home(request):
     # Fetch 5 recently added users excluding the current user
-    recent_users = CustomUser.objects.exclude(id=request.user.id).order_by('-date_joined')[:5]
+    recent_users_list = CustomUser.objects.exclude(id=request.user.id).order_by('-date_joined')
+
+    # Paginate the recent users
+    paginator = Paginator(recent_users_list,1)
+    page = request.GET.get('page')
+
+    try:
+        recent_users = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page parameter is not an integer, show the first page
+        recent_users = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, deliver the last page
+        recent_users = paginator.page(paginator.num_pages)
+
     user = request.user
     profile_picture = user.profile_picture 
 
